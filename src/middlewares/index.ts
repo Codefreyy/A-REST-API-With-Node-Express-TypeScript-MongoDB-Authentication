@@ -2,7 +2,7 @@ import express from 'express';
 // get and merge are functions from lodash for deep object manipulation
 import { get, merge } from 'lodash'
 
-import { getUserBySessionToken } from 'db/users';
+import { getUserBySessionToken } from '../db/users';
 
 export const isAuthenticated = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
     try {
