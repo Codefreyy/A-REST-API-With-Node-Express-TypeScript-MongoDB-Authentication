@@ -38,9 +38,9 @@ export const register = async (req: express.Request, res: express.Response) => {
 export const login = async (req: express.Request, res: express.Response) => {
     try {
 
-        const { username, password, email } = req.body
+        const { password, email } = req.body
 
-        if (!email && !username) {
+        if (!password && !email) {
             return res.sendStatus(400)
         }
 
