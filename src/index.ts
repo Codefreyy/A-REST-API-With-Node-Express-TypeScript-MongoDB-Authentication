@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import compression from 'compression';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import router from 'router';
 require('dotenv').config()
 
 const app = express();
@@ -18,8 +19,11 @@ app.use(cookieParser())
 
 const server = http.createServer(app)
 
-const MONGO_URL = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@joyyujiepengcluster.wlnfm3v.mongodb.net/test?retryWrites=true&w=majority`
+server.listen(8080, () => {
+    console.log('Server is running on port 8080')
+})
 
+const MONGO_URL = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@joyyujiepengcluster.wlnfm3v.mongodb.net/test?retryWrites=true&w=majority`
 
 mongoose.Promise = Promise
 mongoose.connect(MONGO_URL)
@@ -28,6 +32,4 @@ mongoose.connection.on('error', (error) => {
     process.exit(1)
 })
 
-server.listen(8080, () => {
-    console.log('Server is running on port 8080')
-})
+app.use('/', router())
