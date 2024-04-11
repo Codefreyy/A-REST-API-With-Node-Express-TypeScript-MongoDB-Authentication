@@ -18,7 +18,8 @@ export const isAuthenticated = async (req: express.Request, res: express.Respons
         }
 
         // this line aims to add the user object to the request object to be used in the next middleware
-        merge(req, { indentity: existingUser })
+        merge(req, { identity: existingUser })
+
         return next()
 
     } catch (error) {
@@ -32,7 +33,10 @@ export const isOwner = async (req: express.Request, res: express.Response, next:
     try {
         const { id } = req.params
 
+
         const currentUserId = get(req, 'identity._id') as string
+
+        console.log(currentUserId, id)
         if (!currentUserId) {
             return res.sendStatus(401)
         }
